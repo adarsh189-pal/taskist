@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "124681840257",
+    "firebase_url": "https://taskist-bde24.firebaseio.com",
+    "project_id": "taskist-bde24",
+    "storage_bucket": "taskist-bde24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124681840257:android:6407cab5d01b6be684cf80",
+        "android_client_info": {
+          "package_name": "com.example.taskist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124681840257-k7o5cpvf52jfq4ce8g3tkco6tukfib6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcR_RiZ5B4CBP-cMzt_MPpVvVwejjSiro"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124681840257-k7o5cpvf52jfq4ce8g3tkco6tukfib6o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
