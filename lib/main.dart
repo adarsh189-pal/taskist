@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -86,12 +84,11 @@ class _MyAppState extends State<MyApp> {
               shrinkWrap: true,
               itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
-                DocumentSnapshot documentSnapshot = snapshot.data.documents[index];
                 return Dismissible(
                   onDismissed: (direction) {
-                    deleteTodos(documentSnapshot.data()['todoTitle']);
+                    deleteTodos(snapshot.data.documents[index].data()['todoTitle']);
                   },
-                  key: Key(documentSnapshot.data()['todoTitle']),
+                  key: Key(snapshot.data.documents[index].data()['todoTitle']),
                   child: Card(
                     elevation: 4,
                     margin: EdgeInsets.all(8),
@@ -101,11 +98,11 @@ class _MyAppState extends State<MyApp> {
                       trailing: IconButton(
                           onPressed: () {
                             deleteTodos(
-                                documentSnapshot.data()['todoTitle']);
+                                snapshot.data.documents[index].data()['todoTitle']);
                           },
                           icon: Icon(Icons.delete)),
                       title:
-                          Text(documentSnapshot.data()['todoTitle']),
+                          Text(snapshot.data.documents[index].data()['todoTitle']),
                     ),
                   ),
                 );
