@@ -1,7 +1,13 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(MaterialApp(
     theme: ThemeData(
         brightness: Brightness.light,
@@ -22,7 +28,7 @@ class _MyAppState extends State<MyApp> {
   createTodos() {
     DocumentReference documentReference =
         FirebaseFirestore.instance.collection('MyTasks').doc(input);
-    Map<String, String> todos = {input: 'Todo Title'};
+    Map<String, String> todos = {input: 'todoTitle '};
     documentReference.set(todos).whenComplete(() {
       print('$input created');
     });
@@ -75,16 +81,17 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         body: StreamBuilder(
-          builder: (context, snapshots) {
+          builder: (context, snapshot) {
             return ListView.builder(
               shrinkWrap: true,
-              itemCount: snapshots.data.documents.length,
+              itemCount: snapshot.data.docs.length,
               itemBuilder: (context, index) {
+                DocumentSnapshot documentSnapshot = snapshot.data.documents[index];
                 return Dismissible(
                   onDismissed: (direction) {
-                    deleteTodos(snapshots.data.documents[index]['Todo Title']);
+                    deleteTodos(documentSnapshot.data()['todoTitle']);
                   },
-                  key: Key(snapshots.data.documents[index]['Todo Title']),
+                  key: Key(documentSnapshot.data()['todoTitle']),
                   child: Card(
                     elevation: 4,
                     margin: EdgeInsets.all(8),
@@ -94,11 +101,11 @@ class _MyAppState extends State<MyApp> {
                       trailing: IconButton(
                           onPressed: () {
                             deleteTodos(
-                                snapshots.data.documents[index]['Todo Title']);
+                                documentSnapshot.data()['todoTitle']);
                           },
                           icon: Icon(Icons.delete)),
                       title:
-                          Text(snapshots.data.documents[index]['Todo Title']),
+                          Text(documentSnapshot.data()['todoTitle']),
                     ),
                   ),
                 );
